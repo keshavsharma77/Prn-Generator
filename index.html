@@ -9,8 +9,40 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
+    <style>
+      #regis_table{
+        display: none;
+      }
+      #register{
+        padding-bottom: 80px;
+      }
+      .navbar-brand{
+        padding-right: 50px;
+      }
+      .nav-item{
+        padding-right: 30px;
+      }
+    </style>
   </head>
   <body>
+    <!--navigationbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="index.html">PRN Generator</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="nav navbar-nav nav-pills mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link active" id="home1" data-toggle="pill" href="#register">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="register1" data-toggle="pill" href="#regis_table">PRN LIST</a>
+      </li>
+    </ul>
+    </div>
+    </nav>
 
 <!--Form-->
 <div class="" id="register">
@@ -34,7 +66,7 @@
 </div>
 <div class="form-group col-md-6">
   <label for="inputbatch">Batch</label>
-  <input type="number" class="form-control" name="batch" min="1" id="inputbatch">
+  <input type="number" class="form-control" name="batch" min="1" id="inputbatch" required>
 </div>
   </div>
 <div class="form-row">
@@ -62,12 +94,12 @@
     <label for="inputState">Select Branch</label>
     <select id="inputState" name="branch" class="form-control">
       <option selected>Choose...</option>
-      <option>Computer Science</option>
-      <option>Information Technology</option>
-      <option>Mechanical Engineering</option>
-      <option>Chemical Engineering</option>
-      <option>Civil Engineering</option>
-      <option>Electronics Engineering</option>
+      <option value="CS">Computer Science</option>
+      <option value="IT">Information Technology</option>
+      <option value="ME">Mechanical Engineering</option>
+      <option value="CH">Chemical Engineering</option>
+      <option value="CV">Civil Engineering</option>
+      <option value="EX">Electronics Engineering</option>
     </select>
   </div>
 </div>
@@ -81,24 +113,45 @@
 
 <!--Table-->
 <div class="" id="regis_table">
-<h1 style="text-align:center; color:red; padding: 30px 0;">Table Showing registered people details!!!!!</h1>
-<div class="container-fluid">
-    <div class="table-responsive">
-    <div id="demo1">
+  <h1 style="text-align:center; color:red; padding: 30px 0;">Table Showing registered students details!!!!!</h1>
+  <div class="container-fluid">
+      <div class="table-responsive">
+      <div id="demo1">
 
-    </div>
-</div>
-</div>
+      </div>
+  </div>
+
 
 </div>
 
+</div>
+
+<!--footer-->
+
+
+<!--footer-->
+
+<footer class="page-footer font-small stylish-color-dark bg-dark pt-4" style="bottom:0;">
+  <div class="footer-copyright text-center py-3" style="background:#000;">© 2020 Copyright:
+          <a href="mailto:krsharma@mitaoe.ac.in">krsharma@mitaoe.ac.in</a>
+        </div>
+</footer>
 
 
     <script type="text/javascript" defer>
-        var a=[
 
-        ];
+    var today = new Date();
+    var t = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var a=[
 
+    ];
+       var d3;
+       var n=0;
+      document.getElementById("register1").onclick = function() {
+
+
+        document.getElementById("register").style.display = "none";
+        document.getElementById("regis_table").style.display = "block";
         if(a.length == 0)
                {
                    document.getElementById("demo1").innerHTML="<h3><div class='container text-center'>No Submission Yet!!.</div></h3>";
@@ -110,99 +163,135 @@
                    for(i=0;i<a.length;i++)
                    {
                        text= text + "<tr><td>" + (i+1) + "</td><td>" + a[i].name + "</td><td>" + a[i].prn + "</td><td>" + a[i].dept + "</td><td>"  + a[i].email + "</td><td>" + a[i].time + "</td></tr>";
+
                    }
                    text += "</tbody></table>";
                    document.getElementById("demo1").innerHTML=text;
                }
+      }
+      document.getElementById("home1").onclick = function() {
 
-               function validateform(){
-                   var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-                   var regemail= /^\w+([\.]?\w+)*@\w+([\.]?\w+)*(\.\w{2,5})+$/;
-                   var regphone = /^(\+91-|\+91|0)?[6-9]\d{9}$/;
-                   var name1 = document.myform.name.value;
-                   var email1 = document.myform.email.value;
-                   var tel1 = document.myform.tel.value;
-                   var batch = document.myform.batch.value;
-                   var gen = document.myform.gender.value;
-                   var dept1 = document.getElementById('inputState').value;
-                   var inputState = document.getElementById('inputState');
-                   var prn1 ="";
-                   var year=new Date().getFullYear()+"";
-                   year= year.match(/\d{2}$/);
+        document.getElementById("register").style.display = "block";
+        document.getElementById("regis_table").style.display = "none";
 
-                   var d1 = "";
-                   if(dept1 == "Computer Science"){
-                     d1+="CS";
+      }
+
+
+
+             function validateform(){
+                 var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+                 var regemail= /^\w+([\.]?\w+)*@\w+([\.]?\w+)*(\.\w{2,5})+$/;
+                 var regphone = /^(\+91-|\+91|0)?[6-9]\d{9}$/;
+                 var name1 = document.myform.name.value;
+                 var email1 = document.myform.email.value;
+                 var tel1 = document.myform.tel.value;
+                 var batch = document.myform.batch.value;
+                 var gen = document.myform.gender.value;
+                 var dept1 = document.getElementById('inputState').value;
+                 var inputState = document.getElementById('inputState');
+
+
+                const rbs = document.querySelectorAll('input[name="gender"]');
+                 let selectedValue;
+                 for (const rb of rbs) {
+                     if (rb.checked) {
+                         selectedValue = rb.value;
+                         break;
+                     }
+                 }
+
+                   if(!regName.test(name1)){
+                       alert("Please enter your full name (first & last name).Don't use numbers");
+                       document.getElementById('name').focus();
+                       return false;
+                   }
+
+                   else if(!regemail.test(email1)){
+                     alert("Invalid Email Id");
+                     document.getElementById('email').focus();
+                     return false;
+                   }
+                   else if(!regphone.test(tel1)){
+                     alert("Invalid Phone Number. Must start with (+91-) or (+91) or (0) ");
+                     document.getElementById('tel').focus();
+                     return false;
+                   }
+                   else if(inputState.value == "Choose..."){
+                     alert("Please select a Department!!");
+                     return false;
+                   }
+                   if(selectedValue == null){
+                     alert("Please Select Your Gender!!");
+                     return false;
+                   }
+                  var p;
+                   var aa = new Date();
+                   var yr= aa.getFullYear();
+                   yr=yr-2000;
+                   n=n+1;
+                   var d1;
+                   d1 = dept1;
+                  /* if(dept1 == "Computer Science"){
+                     d1="CS";
                    }
                    else if(dept1 == "Information Technology"){
-                     d1+="IT";
+                     d1="IT";
                    }
                    else if(dept1 == "Mechanical Engineering"){
-                     d1+="ME";
+                     d1="ME";
                    }
                    else if(dept1 == "Chemical Engineering"){
-                     d1+="CH";
+                     d1="CH";
                    }
                    else if(dept1 == "Civil Engineering"){
-                     d1+="CV";
+                     d1="CV";
                    }
                    else if(dept1 == "Electronics Engineering"){
-                     d1+="EX";
+                     d1="EX";
                    }
+                   console.log(d1);*/
 
-                  var d2 ="";
-
-                  if(batch <=9){
-                    var a = num.toString(batch);
-                    d2+="0"+a;
+                  var d2;
+                  var k=batch;
+                  if(batch <= 9){
+                    /*var a = num.toString(batch);*/
+                    d2="0"+k;
                   }
                   else if(batch > 9){
-                      var a = num.toString(batch);
-                      d2+=a;
+                      //var a = num.toString(batch);
+                      d2=k;
                   }
 
-                  prn1+= year+d1+d2 ;
-                  console.log(prn1);
-                   const rbs = document.querySelectorAll('input[name="gender"]');
-                   let selectedValue;
-                   for (const rb of rbs) {
-                       if (rb.checked) {
-                           selectedValue = rb.value;
-                           break;
-                       }
-                   }
 
-                     if(!regName.test(name1)){
-                         alert("Please enter your full name (first & last name).Don't use numbers");
-                         document.getElementById('name').focus();
-                         return false;
-                     }
 
-                     else if(!regemail.test(email1)){
-                       alert("Invalid Email Id");
-                       document.getElementById('email').focus();
-                       return false;
-                     }
-                     else if(!regphone.test(tel1)){
-                       alert("Invalid Phone Number. Must start with (+91-) or (+91) or (0) ");
-                       document.getElementById('tel').focus();
-                       return false;
-                     }
-                     else if(inputState.value == "Choose..."){
-                       alert("Please select a Department!!");
-                       return false;
-                     }
-                     if(selectedValue == null){
-                       alert("Please Select Your Gender!!");
-                       return false;
-                     }
-                     var to = new Date();
-                                var h = to.getHours() + ":" + to.getMinutes() + ":" + to.getSeconds();
-                                var k={name: name1, prn: prn1, email: email1 , tel: tel1, dept: dept1 , time: h}
-                                a.push(k);
-                                alert("Thankxx for Filling the form!! Hope you Enjoyy the Event :) !!!");
+                  if(n<10){
 
-       }
+                    d3=d2+"000";
+                  }
+                  else if(n>9 && n<100){
+
+                    d3=d2+"00";
+                  }
+                  else if(n>99 && n<1000){
+
+                    d3=d2+"0";
+                  }
+                  else{
+
+                    d3=d2;
+                  }
+                  p= yr+d1+d3+n;
+
+
+                var to = new Date();
+                var h = to.getHours() + ":" + to.getMinutes() + ":" + to.getSeconds();
+                var k={name: name1,  prn:p, email: email1 , tel: tel1, dept: dept1 , time: h}
+                a.push(k);
+                alert("Thankxx for Filling the form!!) !!!");
+                document.getElementById("regis_form").reset();
+
+     }
+
 
     </script>
   </body>
